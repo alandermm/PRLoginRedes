@@ -50,6 +50,11 @@ namespace PRLoginRedes
                 twitterOptions.ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"];
             });
 
+            services.AddAuthentication().AddMicrosoftAccount(microsoftOptions => {
+                microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ApplicationId"];
+                microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:Password"];
+            });
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
