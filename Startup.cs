@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PRLoginRedes.Data;
 using PRLoginRedes.Models;
 using PRLoginRedes.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace PRLoginRedes
 {
@@ -53,6 +54,15 @@ namespace PRLoginRedes
             services.AddAuthentication().AddMicrosoftAccount(microsoftOptions => {
                 microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ApplicationId"];
                 microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:Password"];
+            });
+
+            services.AddAuthentication().AddOAuth("Github", githubOptions => {
+                githubOptions.ClientId = Configuration["Authentication:Github:ClientId"];
+                githubOptions.ClientSecret = Configuration["Authentication:Github:ClientSecret"];
+                githubOptions.CallbackPath = new PathString("/signin-github");
+                githubOptions.AuthorizationEndpoint = "https://github.com/login/oauth/authorize";
+                githubOptions.TokenEndpoint = "https://github.com/login/oauth/access_token";
+                githubOptions.UserInformationEndpoint = "https://api.github.com/user";
             });
 
             // Add application services.
