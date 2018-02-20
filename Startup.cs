@@ -63,6 +63,8 @@ namespace PRLoginRedes
                 githubOptions.AuthorizationEndpoint = "https://github.com/login/oauth/authorize";
                 githubOptions.TokenEndpoint = "https://github.com/login/oauth/access_token";
                 githubOptions.UserInformationEndpoint = "https://api.github.com/user";
+
+                
             });
 
             // Add application services.
